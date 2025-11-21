@@ -33,14 +33,10 @@ const SearchPage: React.FC = () => {
   useEffect(() => {
     if (!debouncedQuery.trim()) {
       dispatch(fetchAnimeByPopular({ page, limit: 24 }));
-    }
-  }, [dispatch, debouncedQuery, page]);
-
-  useEffect(() => {
-    if (debouncedQuery.trim()) {
+    } else {
       dispatch(fetchAnimeBySearch({ query: debouncedQuery, page, limit: 24 }));
     }
-  }, [debouncedQuery, dispatch, page]);
+  }, [dispatch, debouncedQuery, page]);
 
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-900 via-purple-900 to-slate-900">
