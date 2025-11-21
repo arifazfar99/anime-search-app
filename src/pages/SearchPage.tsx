@@ -20,7 +20,7 @@ const SearchPage: React.FC = () => {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
 
-  const debouncedQuery = useDebounce(query);
+  const debouncedQuery = useDebounce(query).trim();
 
   useEffect(() => {
     setPage(1);
@@ -31,7 +31,7 @@ const SearchPage: React.FC = () => {
   }, [page]);
 
   useEffect(() => {
-    if (!debouncedQuery.trim()) {
+    if (!debouncedQuery) {
       dispatch(fetchAnimeByPopular({ page, limit: 24 }));
     } else {
       dispatch(fetchAnimeBySearch({ query: debouncedQuery, page, limit: 24 }));
